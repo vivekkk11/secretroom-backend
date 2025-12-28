@@ -7,9 +7,15 @@ const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
-  cors: { origin: "*" },
+  cors: {
+    origin: "https://secretroom-xi.vercel.app",
+    methods: ["GET", "POST"],
+  },
 });
 
+app.get("/", (req, res) => {
+  res.send("Socket server running");
+});
 
 io.on("connection", (socket) => {
   console.log(`Socket connected: ${socket.id}`);
